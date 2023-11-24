@@ -1,0 +1,73 @@
+<div class="container_page">
+ <%= render 'page' %> 
+
+<div class="edit_profile_main">
+    <div class="prevContainer">
+        <span>
+        <%= link_to user_path(@user), method: :get do %>
+            <%= image_tag 'prev.png', alt: 'Previous', class: 'previousImage_main' %>
+        <% end %>
+        </span>
+        <span class="prevText">Profile</span>
+    </div>
+
+    <div class="profile">
+    <div class="edit_profileContainer">
+        
+        <div class="profileImage">
+        <% if @user.avatar.attached? %>
+          <%= cl_image_tag @user.avatar.key, :width=>150, :crop=>"fill" %>
+        <% end %>
+        </div>
+
+        <div class="profileDetails">
+          <div class="details">
+            <% if logged_in? %>
+            <p><span>Username</span> <span><%= @user.username %></span></p>
+            <p><span>Email</span> <span><%= @user.email %></span></p>
+            <p><span>Location</span> <span><%= @user.location %></span></p>
+            <% end %>
+            </div>      
+        </div>
+     </div>
+   
+    <div class="editContainer">
+      <h3>Profile Details</h3>
+      <div class="editForm">
+            <%= form_with(model: @user, local: true) do |form| %>
+            
+            <div class="editInput">
+            <%= form.label :username, class: 'label' %>
+            <%= form.text_field :username %>
+            </div>
+
+            <div class="editInput">
+            <%= form.label :email %>
+            <%= form.email_field :email %>
+            </div>
+
+            <div class="editInput">
+            <%= form.label :location %>
+            <%= form.text_field :location %>
+            </div>
+
+            <div class="editInput">
+            <%= form.label :avatar %>
+            <%= form.file_field :avatar,accept: 'image/jpeg,image/png,image/gif' %>
+            </div>
+
+            <div class="btn">
+            <%= form.submit 'Update Profile', class: 'updateBtn' %>
+            </div>
+
+            <% end %>
+
+      </div>
+     
+     </div>
+    
+    </div>
+  
+  </div>
+
+</div>  

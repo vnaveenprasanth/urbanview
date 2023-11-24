@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@300&family=Roboto&family=Work+Sans&display=swap');
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+    font-family: roboto !important;
+  }
+
+  body{
+    background-color: #E5E5E5;
+    overflow: hidden; /* Hide the scrollbar for the body */
+  }
+
+/* this is error style */
+.alert-danger{
+  color: red;
+  font-weight: 600;
+  text-align: center;
+}
+
+.alert-success{
+  color: rgb(31, 219, 31);
+  font-weight: 600;
+  text-align: center;
+}

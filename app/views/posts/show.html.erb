@@ -1,0 +1,194 @@
+<div class="container_page">
+<%= render 'page' %>
+
+<div class="container_detailpost">
+    <div class="prevContainer">
+        <span>
+        <%= link_to posts_path(@post), method: :get do %>
+            <%= image_tag 'prev.png', alt: 'Previous', class: 'previousImage_main' %>
+        <% end %>
+        </span>
+        <span class="prevText">Back to Home</span>
+    </div>
+
+  <div class="detailContainer"> 
+    <div class="detailUser">
+    <div class="postTitle">
+      <h1><%= @post.title %></h1>
+  
+    <div class="postButtons">
+      <button class="share-post-button" data-title="<%= @post.title %>" data-text="<%= @post.description %>" data-url="<%= post_url(@post) %>">
+        <%= image_tag('share.png', alt: 'Share Post') %> Share Post
+      </button>
+      
+      <div class="menuIcon">
+        <% if logged_in? && @post.user == current_user %>
+          <%= image_tag('menu.png', alt: 'Menu') %>
+          <div class="postControls">    
+            <%= button_to('Edit', edit_post_path(@post), method: :get, class: 'edit-post-button') %>
+            <%= button_to('Delete', @post, method: :delete, class: 'delete-post-button',onclick: "return confirm('Are you sure?');") %>
+          </div>
+        <% end %>
+      </div>
+  
+    </div>
+ 
+    </div>  
+    <div class="detailuserSection">
+      <div class="user">
+        <span class="userLogo">
+          <% if @post.user.avatar.attached? %>
+                <%= cl_image_tag @post.user.avatar.key, class:'detailAvatar' %>
+          <% end %>
+        </span>
+        <span class="userData">
+          <span>
+              @<%= @post.user.username %>
+          </span>
+          <span>
+              Posted on <%= @post.created_at.strftime('%d %B %Y') %>
+          </span>
+        </span>
+      </div>
+
+      <div class="interactionButtons">
+            <%= button_to(post_interactions_path(@post, option: 'interested'), method: :post,class:"like-post-button") do %>
+            <%= image_tag('like.png', alt: 'Interested') %>
+            <span><%= @post.interested_count %> is interested</span>
+            <%end%>
+
+            <%= button_to(post_interactions_path(@post, option: 'not_interested'), method: :post,class:"dislike-post-button") do %>
+            <%= image_tag('dislike.png', alt: 'NotInterested') %>
+            <span><%= @post.not_interested_count %> is not interested</span>
+            <%end%>
+
+           <% if @post.tags.include?('events') %>
+              <%= button_to(post_interactions_path(@post, option: 'maybe'), method: :post,class:"maybe-post-button") do %>
+              <%= image_tag('maybe.png', alt: 'Maybe') %>
+              <span><%= @post.maybe_count %> is maybe interested</span>
+              <%end%>
+           <%end%>
+      </div>  
+    </div>
+    </div>
+
+    <% if@post.urls.count > 0 %>
+    <div class="detailImagesSlider">
+      <% @post.urls.each do |url| %>
+        <%= image_tag(url, width: '100px') %>
+      <% end %>
+    </div>
+    <% end %>
+    
+    <div class="descriptionContainer">
+      <div class="description">
+      <div class="detailDescription">
+      <%= simple_format(@post.description) %>
+      </div>
+      </div>
+    </div>
+
+    <div class="tagsSection">
+      <div class="tagsHeading">
+        <h2>Tags</h2>
+      </div>
+      <% @post.tags_array.each do |tag| %>
+        <span class="tags"><%= tag %></span>
+      <% end %>
+    </div>
+
+    <div class="comments">
+
+      <div class="commentsHeading">
+        <h2>Comments</h2>
+      </div>
+
+      <div class="commentsSection">
+    
+      <div class="commentsForm">
+        <div class="commentsForm_userLogo">
+          <% if current_user.avatar.attached? %>
+          <%= cl_image_tag current_user.avatar.key, class:'commentAvatar' %>
+          <% end %>
+        </div>
+        <div class="commentsForm_form">
+          <%= form_for [@post, Comment.new] do |f| %>
+          <%= f.text_area :content, placeholder: 'Add a comment' %>
+          <%= f.submit 'Submit',class:'commentSubmitbtn' %>
+          <% end %>
+         </div>
+      </div>
+    
+      <div class="commentsList">
+    
+       <% @post.comments.each do |comment| %>
+       
+       <div class="comment">
+        <div class="commentUser">
+            <div class="commentUser_userLogo">
+            <% if comment.user.avatar.attached? %>
+            <%= cl_image_tag comment.user.avatar.key, class:'commentAvatar' %>
+            <% end %>
+            </div>
+          
+        </div>
+        <div class="commentContent">
+          <div class="commentContent_user">
+            <%= comment.user.username %>&nbsp;&middot;&nbsp;<%= comment.created_at.strftime('%d %b %y') %>
+            <div class="commentControls">
+                <% if comment.user == current_user %>
+                <%= button_to(edit_post_comment_path(@post, comment), method: :get, class: 'edit-button') do %>
+                <%= image_tag('edit.png', alt: 'Edit') %>
+                <% end %>
+                <%= button_to(post_comment_path(@post, comment), method: :delete, class: 'delete-button', onclick: "return confirm('Are you sure?');") do %>
+                <%= image_tag('delete.png', alt: 'Delete') %>
+                <% end %>
+                <% end %>
+             </div>
+          </div>
+          <div class="commentContent_content">
+            <%= comment.content %>
+          </div>
+        </div>
+       </div>
+
+    <% end %>
+    </div>
+
+  </div>
+
+  </div>
+
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

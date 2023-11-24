@@ -1,0 +1,44 @@
+<div class='container'>
+
+ <div class="header">
+  <%= image_tag 'UrbanView.png', alt: 'Urban Image', class: 'urban_image' %>
+  <h1>UrbanView</h1>
+ </div>
+
+<div class="body">
+ 
+ <div class="container_cityimage">
+  <%= image_tag 'City.avif', alt: 'City Image', class: 'city_image' %>
+ </div>
+
+ <div class="container_form">
+
+
+  <%= form_with(scope: :session, local: true) do |form| %>
+    
+    <div class="input">
+     <%= form.label :email %>
+     <%= form.email_field :email %>
+    </div>
+
+    <div class="input">
+     <%= form.label :password %>
+     <%= form.password_field :password %>
+    </div>
+
+    <div class="btn">
+     <%= form.submit 'Sign In', class: 'sign-btn' %>
+    </div>
+
+  <% end %>
+  
+  <div class="links">
+    <%= link_to 'Forgot Password', password_reset_path %>
+    <%= link_to 'New here? Sign up Now!', signup_path %>
+  </div>
+
+  </div>
+
+ </div>
+
+</div>

@@ -1,0 +1,59 @@
+<div class="container_page">
+<%= render 'page' %>
+
+<div class="container_editpost">
+    <div class="prevContainer">
+        <span>
+        <%= link_to post_path(@post), method: :get do %>
+            <%= image_tag 'prev.png', alt: 'Previous', class: 'previousImage_main' %>
+        <% end %>
+        </span>
+        <span class="prevText">Back to Post</span>
+    </div>
+<div class="editpostContainer">
+    <h3>Edit Post</h3>
+    <div class="editpostForm">
+        <%= form_with(model: @post,local: true) do |form| %>
+            <div class="editpostInput">
+                <%= form.label :title %>
+                <%= form.text_field :title %>
+            </div>
+            <div class="editpostInput">
+                <%= form.label :description %>
+                <%= form.text_area :description %>
+            </div>
+            <div class="editpostInput">
+                <%= form.label :location %>
+                <%= form.text_field :location %>
+            </div>
+            <div class="editpostInput">
+                <%= form.label :tags %>
+                <%= form.text_field :tags %>
+            </div>
+            <div class="editpostInput">
+                <%= form.label :postImages %>
+                <div class="editpostImagesup">
+                    <div> 
+                    <%= form.file_field :images, multiple: true %>
+                    </div>
+                    <div class="editpostImages">
+                        <% @post.urls.each_with_index do |url, index| %>
+                        <div class="editpostImage">
+                            <%= image_tag(url, width: '50px') %>
+                            <%= form.check_box "delete_image_#{index}" %>
+                            <%= form.label "delete_image_#{index}", "Delete",class:'imageCheckboxText' %>
+                        </div>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+            <div class="editpostInput">
+                <%= form.submit 'Update Post', class:'editpostBtn' %>
+            </div>
+        <% end %>
+    </div>
+</div>
+</div>
+</div>
+
+

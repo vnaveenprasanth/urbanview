@@ -1,0 +1,10 @@
+<div class="container_page">
+<%= render 'page' %>
+<div class="buttons">
+    <% if logged_in? %>
+    <%= button_to 'Account', user_path(@user), method: :get %>
+    <%= button_to 'Logout', logout_path, method: :delete %>
+    <p><span>id</span> <span><%= @user.id %></span></p>
+    <% end %>
+    </div>
+</div>

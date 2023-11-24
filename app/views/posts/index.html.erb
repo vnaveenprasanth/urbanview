@@ -1,0 +1,61 @@
+<div class="container_page">
+<%= render 'page' %>
+<div class="container_posts">
+
+<% @posts.each do |post| %>
+<div class="posts_card">
+ <div class="post">
+  <% if post.urls.present? %>
+    <div class="postImage">
+      <%= image_tag(post.urls.first, class: 'image') %>
+    </div>
+  <% else %>
+    <div class="postImage">
+      <%= image_tag('UrbanView.png', class: 'image') %>
+    </div>
+  <% end %>
+  <div class="postTags">
+    <% post.tags_array.each do |tag| %>
+    <span class="tags"><%= tag %></span>
+    <% end %>
+  </div>
+  <div class="postTitle">
+    <p><%= post.title%> 
+    <span class="postDescriptionlink">
+    <%= link_to '...Read more!', post_path(post) %> 
+    </span></p>
+  </div>
+  <div class="postUser">
+    <span class="postUser_user">
+      <span>
+        <% if post.user.avatar.attached? %>
+              <%= cl_image_tag post.user.avatar.key, class:'postAvatar' %>
+        <% end %>
+      </span>
+      <span>
+          @<%= post.user.username %>
+      </span>
+      &middot;
+      <span>
+          <%= post.created_at.strftime('%d %b') %>
+      </span>
+    </span>
+
+     <span class="postUser_interaction">
+         <%= image_tag('upvote.png', alt: 'Edit',class:'post-upvote-icon') %>
+         <% if post.interactions.count <=1 %>
+         <%= post.interactions.count %> Like
+         <% else %>
+         <%= post.interactions.count %> Likes
+         <% end %>
+    </span>
+  </div>
+
+ </div>
+</div>
+<% end %>
+
+</div>
+</div>
+
+

@@ -1,0 +1,44 @@
+<div class="container_page">
+<%= render 'page' %>
+
+<div class="container_createpost">
+    <div class="prevContainer">
+        <span>
+        <%= link_to posts_path(@post), method: :get do %>
+            <%= image_tag 'prev.png', alt: 'Previous', class: 'previousImage_main' %>
+        <% end %>
+        </span>
+        <span class="prevText">Posts</span>
+    </div>
+<div class="createContainer">
+    <h3>Create new Post</h3>
+    <div class="createForm">
+    <%= form_with scope: :post, url: posts_path,local: true do |form| %>
+    <div class="createInput">
+        <%= form.label :title %>
+        <%= form.text_field :title %>
+    </div>
+    <div class="createInput">
+        <%= form.label :description %>
+        <%= form.text_area :description %>
+    </div>
+    <div class="createInput">
+        <%= form.label :location %>
+        <%= form.text_field :location %>
+    </div>
+    <div class="createInput">
+        <%= form.label :tags %>
+        <%= form.text_field :tags %>
+    </div>
+    <div class="createInput">
+        <%= form.label :postImages %>
+        <%= form.file_field :images, multiple: true,accept: 'image/jpeg,image/png,image/gif' %>
+    </div>
+    <div class="createInput">
+        <%= form.submit 'Create Post',class:'createBtn' %>
+    </div>
+    <% end %>
+    </div>
+</div>
+</div>
+</div>

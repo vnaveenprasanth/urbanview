@@ -1,0 +1,36 @@
+<div class="container_page">
+<%= render 'page' %>
+
+<div class="profile_main">
+    
+    <div class="prevContainer">
+        <span>
+        <%= link_to root_path(@user), method: :get do %>
+            <%= image_tag 'prev.png', alt: 'Previous', class: 'previousImage_main' %>
+        <% end %>
+        </span>
+        <span class="prevText">Home</span>
+    </div>
+
+    <div class="profileContainer">
+        <div class="profileImage">
+            <% if @user.avatar.attached? %>
+                <%= cl_image_tag @user.avatar.key, :width=>150, :crop=>"fill" %>
+            <% end %>
+        </div>
+        <div class="profileDetails">
+             <div class="details">
+               <% if logged_in? %>
+               <p><span>Username</span> <span><%= @user.username %></span></p>
+               <p><span>Email</span> <span><%= @user.email %></span></p>
+               <p><span>Location</span> <span><%= @user.location %></span></p>
+               <% end %>
+             </div>
+            <div class="button">
+               <%= button_to 'Edit Profile', edit_user_path(@user), method: :get, class:'editBtn' %>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>

@@ -1,0 +1,27 @@
+<div class="container_page">
+<%= render 'page' %>
+<div class="container_editComment">
+   
+    <div class="prevContainer">
+            <span>
+            <%= link_to post_path(@post), method: :get do %>
+                <%= image_tag 'prev.png', alt: 'Previous', class: 'previousImage_main' %>
+            <% end %>
+            </span>
+            <span class="prevText">Back to Post</span>
+    </div>
+
+    <div class="editcommentContainer">
+    <h1>Edit your comment</h1>
+      <div class="commentsForm">
+        <div class="commentsForm_form">
+          <%= form_for [@post, @comment] do |f| %>
+          <%= f.text_area :content %>
+          <%= f.submit 'Edit comment',class:'commentSubmitbtn' %>
+          <% end %>
+         </div>
+      </div>
+    </div>
+
+</div>
+</div>

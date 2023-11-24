@@ -1,0 +1,16 @@
+<div class="container_page">
+<%= render 'page' %>
+<div class="passwordReset_container">
+<h1>Reset your password</h1>
+<%= form_with model: @user, url: password_reset_edit_path(token: params[:token]), class:'passwordReset_form' do |form| %>
+  <div class="passwordReset">
+    <%= form.label :password %>
+    <%= form.password_field :password %>
+  </div>
+  <div class="passwordReset">
+    <%= form.label :password_confirmation %>
+    <%= form.password_field :password_confirmation %>
+  </div>
+  <%= form.submit 'Reset Password',class:'passwordReset_btn' %>
+<%end%>
+</div>

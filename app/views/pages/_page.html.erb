@@ -1,0 +1,33 @@
+<div class="container_main">   
+    <div class="header_main"> 
+        <div class="logo_main">
+            <%= image_tag 'UrbanView.png', alt: 'Urban Image', class: 'urbanImage_main' %>
+        </div>
+        <div class="searchBar_main">
+            <%= form_with(url: user_path(@user), method: "get") do |form| %>
+                <%= form.text_field :query %>
+                <%= form.submit "Search", class:'searchBtn'%>
+            <% end %>
+        </div>
+               <div class="pageButtons_main">
+            <%= link_to new_post_path do %>
+                <%= image_tag 'add.png', alt: 'Add Post', class: 'addImage_main' %>
+            <% end %>
+            <%= link_to user_path(@user) do %>
+                <%= image_tag 'user.png', alt: 'User Profile', class: 'userImage_main' %>
+            <% end %>
+        </div>
+    </div>
+    <div class="tabNav_main">      
+        <div class="tabs_main">
+            <div class="tab">Events</div>
+            <div class="tab">News</div>
+            <div class="tab">Jobs</div>
+            <div class="tab">Charity</div>
+            <div class="tab">Explore</div>
+        </div>
+        <div class="location_main">
+            <p>Select location<span><%= image_tag 'dropdown.png', alt: 'Dropdown', class: 'dropdownImage_main' %></span></p>
+        </div>
+    </div>
+</div>

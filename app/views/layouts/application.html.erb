@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>UrbanView</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "users", media: 'all' %>
+    <%= stylesheet_link_tag "pages", media: 'all' %>
+    <%= stylesheet_link_tag "posts", media: 'all' %>
+    <%= stylesheet_link_tag "modal", media: 'all' %>
+    <%= stylesheet_link_tag "password_reset", media: 'all' %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+
+    <%= stylesheet_link_tag 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css' %>
+    <%= stylesheet_link_tag 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css' %>
+
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@300&family=Work+Sans&display=swap');
+  </style>
+  </head>
+
+  <body>
+    <%= render 'modal' %>
+    <%= yield %>
+    <%= javascript_include_tag 'https://code.jquery.com/jquery-3.6.0.min.js' %>
+    <%= javascript_include_tag 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js' %>
+    <%= javascript_include_tag 'dropdown' %>
+    <%= javascript_include_tag 'modal' %>
+    <%= javascript_include_tag 'share', 'data-turbolinks-track': 'reload' %>
+    
+  </body>
+</html>

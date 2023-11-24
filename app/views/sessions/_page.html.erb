@@ -1,0 +1,49 @@
+<div class="container_main">   
+ <div class="header_main"> 
+    <div class="logo_main">
+    <%= image_tag 'UrbanView.png', alt: 'Urban Image', class: 'urbanImage_main' %>
+    </div>
+    <div class="searchBar_main">
+        <%= form_with(url: posts_path(@posts), method: "get") do |form| %>
+            <%= form.text_field :query %>
+            <%= form.submit "Search", class:'searchBtn'%>
+        <% end %>
+    </div>
+    
+    <div class="pageButtons_main">
+        <%= link_to new_post_path,title:'create new post' do %>
+            <%= image_tag 'add.png', alt: 'Add Post', class: 'addImage_main' %>
+        <% end %>
+        <% if logged_in? && @user.avatar.attached? %>
+            <%= cl_image_tag @user.avatar.key, class:'userImage_main' %>
+        <% end %>  
+        <div class="user_dropdown">
+            <% if logged_in? %>
+                <div class="user_btns">
+                <%= button_to 'Account', user_path(@user), method: :get %>
+                <%= button_to 'Logout', logout_path, method: :delete %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+    </div>
+    <div class="tabNav_main">   
+    <div class="tabs_main">
+        <%= link_to "Events", posts_path(tab: 'Events') %>
+        <%= link_to "News", posts_path(tab: 'News') %>
+        <%= link_to "Jobs", posts_path(tab: 'Jobs') %>
+        <%= link_to "Charity", posts_path(tab: 'Charity') %>
+        <%= link_to "Explore", posts_path(tab: 'Explore') %>
+    </div>   
+    <div class="location_main">
+        <p><span class="cityName">Select location</span><span><%= image_tag 'dropdown.png', alt: 'Dropdown', class: 'dropdownImage_main' %></span></p>
+        <div class="dropdown-content">
+            <input type="text" id="locationSearch" placeholder="Search cities">
+            <ul id="locationList">
+            <!-- City names -->
+            </ul>
+        </div>
+    </div>
+    </div>
+</div>
+

@@ -1,0 +1,11 @@
+development: 
+  cloud_name: "dqrt7ghqi"
+  api_key: "172955768663188"
+  api_secret: "ZWs1Eul-xp13T1EN1Pcn_Wd-6U4"
+  secure: true
+
+production:
+  cloud_name: "dqrt7ghqi"
+  api_key: "172955768663188"
+  api_secret: "ZWs1Eul-xp13T1EN1Pcn_Wd-6U4"
+  secure: true

@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@splidejs/splide": "^4.1.4",
+    "slick-carousel": "^1.8.1",
+    "stimulus": "^3.2.2",
+    "stimulus-carousel": "^5.0.1",
+    "turbolinks": "^5.2.0"
+  }
+}

@@ -1,0 +1,13 @@
+<div class="container_page">
+<%= render 'page' %>
+<div class="passwordReset_container">
+<h1>Forgot your password?</h1>
+<%= form_with url: password_reset_path, class:'passwordReset_form' do |form| %>
+    <div class="passwordReset">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+    </div>
+    <%= form.submit 'Send Reset Link', class:'passwordReset_btn' %>
+<%end%>
+</div>
+</div>
