@@ -1,8 +1,14 @@
 <div class="container_main">   
- <div class="header_main"> 
+ <div class="header_main">
     <div class="logo_main">
-    <%= image_tag 'UrbanView.png', alt: 'Urban Image', class: 'urbanImage_main' %>
+    <span >
+    <%= image_tag 'citygif.gif', alt: 'Urban Image', class: 'urbanImage_main' %>
+    </span>
+    <span>
+    UrbanView
+    </span>
     </div>
+
     <div class="searchBar_main">
         <%= form_with(url: posts_path(@posts), method: "get") do |form| %>
             <%= form.text_field :query %>
