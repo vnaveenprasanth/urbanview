@@ -21,15 +21,15 @@
         <%= image_tag('share.png', alt: 'Share Post') %> Share Post
       </button>
       
+      <% if logged_in? && @post.user == current_user %>
       <div class="menuIcon">
-        <% if logged_in? && @post.user == current_user %>
           <%= image_tag('menu.png', alt: 'Menu') %>
           <div class="postControls">    
             <%= button_to('Edit', edit_post_path(@post), method: :get, class: 'edit-post-button') %>
             <%= button_to('Delete', @post, method: :delete, class: 'delete-post-button',onclick: "return confirm('Are you sure?');") %>
           </div>
-        <% end %>
       </div>
+     <% end %>
   
     </div>
  
@@ -52,22 +52,42 @@
       </div>
 
       <div class="interactionButtons">
-            <%= button_to(post_interactions_path(@post, option: 'interested'), method: :post,class:"like-post-button") do %>
-            <%= image_tag('like.png', alt: 'Interested') %>
-            <span><%= @post.interested_count %> is interested</span>
-            <%end%>
 
-            <%= button_to(post_interactions_path(@post, option: 'not_interested'), method: :post,class:"dislike-post-button") do %>
-            <%= image_tag('dislike.png', alt: 'NotInterested') %>
-            <span><%= @post.not_interested_count %> is not interested</span>
-            <%end%>
+         <% if @post.tags.include?('events') || @post.tags.include?('Events') %>
+          <%= button_to(post_interactions_path(@post, option: 'going'), method: :post, class: "like-post-button #{'selected' if @post.selected_option(current_user) == 'going'}") do %>
+             <span>🙌</span>
+            <span><%= @post.going_count %> Going</span>
+          <% end %>
 
-           <% if @post.tags.include?('events') %>
-              <%= button_to(post_interactions_path(@post, option: 'maybe'), method: :post,class:"maybe-post-button") do %>
-              <%= image_tag('maybe.png', alt: 'Maybe') %>
-              <span><%= @post.maybe_count %> is maybe interested</span>
-              <%end%>
-           <%end%>
+          <%= button_to(post_interactions_path(@post, option: 'not_going'), method: :post, class: "dislike-post-button #{'selected' if @post.selected_option(current_user) == 'not_going'}") do %>
+             <span>😔</span>
+            <span><%= @post.not_going_count %> Not going</span>
+          <% end %>
+
+          <%= button_to(post_interactions_path(@post, option: 'maybe'), method: :post, class: "maybe-post-button #{'selected' if @post.selected_option(current_user) == 'maybe'}") do %>
+            <span>😶‍🌫️</span>
+            <span><%= @post.maybe_count %> Maybe</span>
+          <% end %>
+
+        <% elsif @post.tags.include?('charity') || @post.tags.include?('Charity')  %>
+          <%= button_to(post_interactions_path(@post, option: 'donated'), method: :post, class: "like-post-button #{'selected' if @post.selected_option(current_user) == 'donated'}") do %>
+            <span>💗</span>
+            <span><%= @post.donated_count %> donated</span>
+          <% end %>
+
+        <% else %>
+          <%= button_to(post_interactions_path(@post, option: 'like'), method: :post, class: "like-post-button #{'selected' if @post.selected_option(current_user) == 'like'}") do %>
+            <%= image_tag('like.png', alt: 'like') %>
+            <span><%= @post.like_count %> likes</span>
+          <% end %>
+
+          <%= button_to(post_interactions_path(@post, option: 'dislike'), method: :post, class: "dislike-post-button #{'selected' if @post.selected_option(current_user) == 'dislike'}") do %>
+            <%= image_tag('dislike.png', alt: 'Notgoing') %>
+            <span><%= @post.dislike_count %> dislikes</span>
+          <% end %>
+        <% end %>
+
+  
       </div>  
     </div>
     </div>
@@ -79,8 +99,31 @@
       <% end %>
     </div>
     <% end %>
+
+    <% if @post.tags.include?('events') || @post.tags.include?('Events') %>
+        <div class="interactionButtonsSection">
+          Share your decision:
+          <%= button_to(post_interactions_path(@post, option: 'going'), method: :post, class: "like-post-button") do %>
+            <span>🙌</span>
+            <span> Going</span>
+          <% end %>
+
+          <%= button_to(post_interactions_path(@post, option: 'not_going'), method: :post, class: "dislike-post-button") do %>
+            <span>😔</span>
+            <span> Not going</span>
+          <% end %>
+
+          <%= button_to(post_interactions_path(@post, option: 'maybe'), method: :post, class: "maybe-post-button") do %>
+            <span>😶‍🌫️</span>
+            <span> Maybe</span>
+          <% end %>
+          </div>
+    <% end %>
     
     <div class="descriptionContainer">
+      <div class="descriptionHeading">
+        <h2>Description</h2>
+      </div>
       <div class="description">
       <div class="detailDescription">
       <%= simple_format(@post.description) %>

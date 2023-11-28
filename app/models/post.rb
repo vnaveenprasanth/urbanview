@@ -16,20 +16,37 @@ class Post < ApplicationRecord
    
     has_many :interactions, dependent: :destroy
     has_many :interactors, through: :interactions, source: :user
-
-    def interested_count
-       interactions.where(option: 'interested').count
+    
+    def tags_array
+        tags.split(',').map(&:strip)
     end
 
-    def not_interested_count
-        interactions.where(option: 'not_interested').count
+    def going_count
+       interactions.where(option: 'going').count
+    end
+
+    def not_going_count
+        interactions.where(option: 'not_going').count
     end
 
     def maybe_count
         interactions.where(option: 'maybe').count
     end
 
-    def tags_array
-        tags.split(',').map(&:strip)
+    def donated_count
+        interactions.where(option: 'donated').count
     end
+
+    def like_count
+        interactions.where(option: 'like').count
+    end
+
+    def dislike_count
+        interactions.where(option: 'dislike').count
+    end
+
+    def selected_option(user)
+        interaction = interactions.find_by(user_id: user.id)
+        interaction&.option
+      end
 end

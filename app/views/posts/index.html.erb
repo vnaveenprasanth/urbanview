@@ -8,6 +8,25 @@
   <% if post.urls.present? %>
     <div class="postImage">
       <%= image_tag(post.urls.first, class: 'image') %>
+
+      <% if post.going_count > 0 && post.tags.include?('events') || post.tags.include?('Events') %>
+      <span class="interaction_count"><%= post.going_count %> going 
+      <%= image_tag('animated_gif.gif',class: 'animated_gif') %>
+      </span>
+      <% end %>
+
+      <% if post.donated_count > 0 && post.tags.include?('charity') || post.tags.include?('Charity') %>
+      <span class="interaction_count"><%= post.donated_count %> donated
+      <%= image_tag('charity_gif.gif',class: 'animated_gif') %>
+      </span>
+      <% end %>
+
+      <% if post.like_count > 0 %>
+      <span class="interaction_count"><%= post.like_count %> liked
+      <%= image_tag('like_gif.gif',class: 'animated_gif') %>
+      </span>
+      <% end %>
+
     </div>
   <% else %>
     <div class="postImage">
@@ -21,6 +40,11 @@
   </div>
   <div class="postTitle">
     <p><%= post.title%> 
+    <span class="postDescriptionlink"> 
+    </span></p>
+  </div>
+   <div class="postDescription">
+    <p><%= truncate(post.description, length: 70, separator: ' ') %> 
     <span class="postDescriptionlink">
     <%= link_to '...Read more!', post_path(post) %> 
     </span></p>
@@ -33,22 +57,17 @@
         <% end %>
       </span>
       <span>
-          @<%= post.user.username %>
+          &nbsp;@<%= post.user.username %>
       </span>
+      &nbsp;
       &middot;
+      &nbsp;
       <span>
-          <%= post.created_at.strftime('%d %b') %>
+          <%= post.created_at.strftime('%d %b %y') %>
       </span>
     </span>
 
-     <span class="postUser_interaction">
-         <%= image_tag('upvote.png', alt: 'Edit',class:'post-upvote-icon') %>
-         <% if post.interactions.count <=1 %>
-         <%= post.interactions.count %> Like
-         <% else %>
-         <%= post.interactions.count %> Likes
-         <% end %>
-    </span>
+   
   </div>
 
  </div>
