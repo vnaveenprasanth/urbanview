@@ -7,8 +7,8 @@ document.addEventListener('turbo:load', function() {
       $('.detailImagesSlider').slick({
         slidesToShow: 1,
         slidesToScroll: 1,
-        autoplay: false,
-        autoplaySpeed: 500,
+        autoplay: true,
+        autoplaySpeed: 800,
         dots: false, 
         arrows: false,
         // adaptiveHeight: true,

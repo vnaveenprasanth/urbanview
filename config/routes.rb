@@ -2,7 +2,12 @@ Rails.application.routes.draw do
   root "posts#index"
 
   get 'signup', to: 'users#new'
-  resources :users, except: [:new]
+  resources :users, except: [:new] do
+  member do
+    post 'follow', to: 'users#follow'
+    delete 'unfollow', to: 'users#unfollow'
+  end
+end
   
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'

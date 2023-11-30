@@ -1238,7 +1238,6 @@ document.addEventListener("turbo:load", function () {
         }
 
         if (!selectedCity) {
-          console.log('in naviga')
           if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
               function (position) {
@@ -1318,32 +1317,35 @@ document.addEventListener("turbo:load", function () {
     });
   
     // userdropdown 
-    const userImage = document.querySelector('.userImage_main');
+    const userImage = document.querySelector('.userImage_main'); 
     const userDropdown = document.querySelector('.user_dropdown');
-  
-    userImage.addEventListener('click', function() {
-      userDropdown.style.display = (userDropdown.style.display === 'block') ? 'none' : 'block';
-    })
-  
+    
+    userImage.addEventListener('click', function () {
+        userDropdown.style.display = (userDropdown.style.display === 'block') ? 'none' : 'block';
+      })
+    
     document.addEventListener('click', function (e) {
-      if (!e.target.closest('.pageButtons_main')) {
-        userDropdown.style.display = 'none';
+        if (!e.target.closest('.pageButtons_main')) {
+          userDropdown.style.display = 'none';
+        }
+      });
+    
+    
+    //postcontroldropdown
+
+    const menuImage = document.querySelector('.menuIcon');
+    const controlDropdown = document.querySelector('.postControls');
+
+    menuImage?.addEventListener('click', function() {
+      controlDropdown.style.display = (controlDropdown.style.display === 'block') ? 'none' : 'block';
+    })
+
+    const detailContainer = document.querySelector('.detailContainer')
+    detailContainer.addEventListener('click', function (e) {
+      if (!e.target.closest('.postButtons')) {
+        controlDropdown.style.display = 'none';
       }
     });
-  
-  //postcontroldropdown
-  const menuImage = document.querySelector('.menuIcon');
-  const controlDropdown = document.querySelector('.postControls');
-
-  menuImage.addEventListener('click', function() {
-    controlDropdown.style.display = (controlDropdown.style.display === 'block') ? 'none' : 'block';
-  })
-
-  document.addEventListener('click', function (e) {
-    if (!e.target.closest('.postButtons')) {
-      controlDropdown.style.display = 'none';
-    }
-  });
       
   });
   

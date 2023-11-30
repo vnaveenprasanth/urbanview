@@ -27,7 +27,7 @@ class PostsController < ApplicationController
             when 'Charity'
               @posts = Post.where("tags LIKE ? AND location LIKE ?", "%Charity%", "%#{params[:location]}%")
             when 'Explore'
-              @posts = Post.where("location LIKE ?", "%#{params[:location]}%")
+              @posts = Post.all
             else
               @posts = Post.where("location LIKE ?", "%#{params[:location]}%")
             end
@@ -66,6 +66,10 @@ class PostsController < ApplicationController
                 @post.urls << 'https://images3.alphacoders.com/133/1337543.png'
                 @post.save
             end
+        current_user.followers.each do |follower|
+            user = follower.follower
+            PostMailer.new_post_notification(user, @post).deliver_now
+        end
             redirect_to @post, notice: 'Post was successfully created.'
         else
             render :new
@@ -106,7 +110,7 @@ class PostsController < ApplicationController
     private
 
     def post_params
-      params.require(:post).permit(:title, :description, :location, :tags)
+      params.require(:post).permit(:title, :description, :location, :tags,:enable_event, :start_date, :end_date)
     end
 
     def require_login

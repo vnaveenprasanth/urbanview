@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Post Notification</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    p {
+      color: #555;
+    }
+
+    .post-link {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 3px;
+    }
+
+    .post-link:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>New Post Notification</h1>
+    <p>Hi <%= @user.username %>,</p>
+    <p><%= @post.user.username %> has made a new post:</p>
+    <p><strong>Title:</strong> <%= @post.title %></p>
+    <p><strong>Content:</strong> <%= @post.description %></p>
+    <a class="post-link" href="<%= post_url(@post) %>">View Post</a>
+  </div>
+</body>
+</html>
+

@@ -14,8 +14,7 @@
   <div class="detailContainer"> 
     <div class="detailUser">
     <div class="postTitle">
-      <h1><%= @post.title %></h1>
-  
+      <h1><%= @post.title %></h1> 
     <div class="postButtons">
       <button class="share-post-button" data-title="<%= @post.title %>" data-text="<%= @post.description %>" data-url="<%= post_url(@post) %>">
         <%= image_tag('share.png', alt: 'Share Post') %> Share Post
@@ -48,6 +47,19 @@
           <span>
               Posted on <%= @post.created_at.strftime('%d %B %Y') %>
           </span>
+        </span>
+        <span class="follow_unfollow-btn">
+            <% unless current_user == @post.user %>
+              <% if current_user.following_users.include?(@post.user) %>
+                <%= form_tag unfollow_user_path(@post.user), method: :delete do %>
+                <%= submit_tag 'Unfollow' %>
+                <% end %>
+              <% else %>
+                <%= form_tag follow_user_path(@post.user), method: :post do %>
+                <%= submit_tag 'Follow' %>
+                <% end %>
+              <% end %>
+            <% end %>
         </span>
       </div>
 

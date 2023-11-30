@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     def create
     @user = User.new(user_params)
     
-    @user.avatar.attach(io: File.open('/home/naveenprasanthv/Rails/Devise - Copy/UrbanView/app/assets/images/userimg.png'), filename: 'default_avatar.png', content_type: 'image/png')
+    @user.avatar.attach(io: File.open('/home/naveenprasanthv/Rails/Urbanview/UrbanView/app/assets/images/userimg.png'), filename: 'default_avatar.png', content_type: 'image/png')
 
       if @user.password == params[:user][:password_confirmation]
         if @user.save
@@ -36,6 +36,26 @@ class UsersController < ApplicationController
       else
         flash.now[:error] = "Check the credentials entered!"
           render 'new', status: :unprocessable_entity
+      end
+    end
+
+    def follow
+      @user_to_follow = User.find(params[:id])
+      follow = current_user.following.new(followed: @user_to_follow)
+  
+      if follow.save
+        redirect_to post_path, notice: 'You are now following this user. You will receive mails notifying new posts!'
+      end
+      
+    end
+
+    def unfollow
+      @user_to_unfollow = User.find(params[:id])
+      follow = current_user.following.find_by(followed: @user_to_unfollow)
+      
+      if follow
+      follow.destroy
+      redirect_to post_path, notice: 'You have unfollowed this user. You will no longer receive mails notifying new posts!'
       end
     end
      

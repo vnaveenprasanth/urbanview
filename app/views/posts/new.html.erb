@@ -32,8 +32,26 @@
     </div>
     <div class="createInput">
         <%= form.label :postImages %>
-        <%= form.file_field :images, multiple: true,accept: 'image/jpeg,image/png,image/gif' %>
+        <%= form.file_field :images, multiple: true,accept: 'image/jpeg,image/png,image/gif'%>
     </div>
+    
+    <div class="createInput">
+        <%= form.label :enable_event, class:'enable-event-label' %>
+        <%= form.check_box :enable_event, class:'enable-event-checkbox' %>
+    </div>
+
+    <div class="event-dates">
+        <div class="createInput">
+        <%= form.label :start_date %>
+        <%= form.datetime_local_field :start_date, disabled: !@post.enable_event %>
+        </div>
+
+        <div class="createInput">
+        <%= form.label :end_date %>
+        <%= form.datetime_local_field :end_date, disabled: !@post.enable_event %>
+        </div>
+    </div>
+
     <div class="createInput">
         <%= form.submit 'Create Post',class:'createBtn' %>
     </div>

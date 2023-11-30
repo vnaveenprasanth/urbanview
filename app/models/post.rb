@@ -1,4 +1,7 @@
 class Post < ApplicationRecord
+
+    validate :valid_tags
+    
     # has_one_attached :postImages
     store :imageUrls, accessors: [:urls], coder: JSON
     after_initialize do
@@ -10,13 +13,15 @@ class Post < ApplicationRecord
     validates :tags, presence: true
     validates :location, presence: true
 
+    validate :valid_event_dates
+
     belongs_to :user
 
     has_many :comments, dependent: :destroy
    
     has_many :interactions, dependent: :destroy
     has_many :interactors, through: :interactions, source: :user
-    
+     
     def tags_array
         tags.split(',').map(&:strip)
     end
@@ -48,5 +53,40 @@ class Post < ApplicationRecord
     def selected_option(user)
         interaction = interactions.find_by(user_id: user.id)
         interaction&.option
-      end
+    end
+
+    def event_status
+        current_time = Time.now
+        if start_date.present? && end_date.present?
+        if current_time < start_date
+          'Upcoming'
+        elsif current_time >= start_date && current_time <= end_date
+          'Ongoing'
+        else
+          'Ended'
+        end
+    end
+    end
+
+    private
+
+    def valid_tags
+        valid_values = %w(Events News Jobs Charity events news jobs charity)
+        valid_tags_array = tags_array.select { |tag| valid_values.include?(tag) }
+        unless valid_tags_array.length == 1
+        errors.add(:tags, "should contain exactly one of: #{valid_values.join(', ')}")
+        end
+    end
+
+    def event_enabled?
+        enable_event == true
+    end
+
+    def valid_event_dates
+        return unless event_enabled?
+
+        if start_date.present? && end_date.present? && start_date > end_date
+        errors.add(:end_date, 'must be after the start date')
+        end
+    end
 end
