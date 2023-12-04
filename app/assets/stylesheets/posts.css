@@ -31,6 +31,11 @@
   transform: translateY(-0.1rem);
 }
 
+.postLink{
+  text-decoration: none;
+  color: black;
+}
+
 .post {
   display: flex;
   flex-direction: column;
@@ -39,6 +44,7 @@
   padding: 16px;
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
 .postImage {
@@ -47,8 +53,6 @@
   position: relative;
 }
 
-
-
 .interaction_count {
   display: flex;
   align-items: center;
@@ -56,9 +60,10 @@
   position: absolute;
   border-radius: 8px;
   min-height: 30px;
-  width: 100px;
+  min-width: 100px;
   top: 10px;
   right: 8px;
+  padding-left: 8px;
   font-size: 12px;
   background-color: #14213d;
   color: #e5e5e5;
@@ -72,6 +77,52 @@
   border-radius: 4px;
   padding: 2px;
 }
+
+.postStatus{
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  top: 42%;
+  left: 147px;
+  transform: rotate(270deg);
+}
+
+.event_status{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 2px;
+  min-height: 25px;
+  width: 90px;
+  font-size: 12px;
+  background-color: #1eaa26;
+  color: #e5e5e5;
+  letter-spacing: 1.5px;
+  margin-right: 8px;
+}
+
+.status_Upcoming{
+  background-color: #fca311;
+}
+
+
+.status_Ongoing{
+  background-color:  #1eaa26;
+}
+
+
+.status_Ended{
+  background-color: #fc1111;
+}
+
+.post_typeDropdown{
+border: none;
+border-radius: 4px;
+padding: 4px;
+width: 500px;
+font-size: 18px;}
 
 .image {
   width: 100%;

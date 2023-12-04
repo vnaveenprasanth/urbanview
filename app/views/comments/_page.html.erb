@@ -29,7 +29,7 @@
     </div>
     <div class="tabNav_main">   
     <div class="tabs_main">
-        <%= link_to "Events", posts_path(tab: 'Events') %>
+        <%= link_to "Events", posts_path(tab: 'Events'),class:('selected' if @active_tab == "Events") %>
         <%= link_to "News", posts_path(tab: 'News') %>
         <%= link_to "Jobs", posts_path(tab: 'Jobs') %>
         <%= link_to "Charity", posts_path(tab: 'Charity') %>

@@ -29,11 +29,11 @@
     </div>
     <div class="tabNav_main">   
     <div class="tabs_main">
-        <%= link_to "Events", posts_path(tab: 'Events') %>
-        <%= link_to "News", posts_path(tab: 'News') %>
-        <%= link_to "Jobs", posts_path(tab: 'Jobs') %>
-        <%= link_to "Charity", posts_path(tab: 'Charity') %>
-        <%= link_to "Explore", posts_path(tab: 'Explore') %>
+        <%= link_to "Events", posts_path(tab: 'Events'),class:('selectedTab' if @active_tab == "Events") %>
+        <%= link_to "News", posts_path(tab: 'News'),class:('selectedTab' if @active_tab == "News") %>
+        <%= link_to "Jobs", posts_path(tab: 'Jobs'),class:('selectedTab' if @active_tab == "Jobs") %>
+        <%= link_to "Charity", posts_path(tab: 'Charity'),class:('selectedTab' if @active_tab == "Charity") %>
+        <%= link_to "Explore", posts_path(tab: 'Explore'),class:('selectedTab' if @active_tab == "Explore") %>
     </div>   
     <div class="location_main">
         <p><span class="cityName">Select location</span><span><%= image_tag 'dropdown.png', alt: 'Dropdown', class: 'dropdownImage_main' %></span></p>

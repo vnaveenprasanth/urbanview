@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
 
-    validate :valid_tags
+    # validate :valid_tags
     
     # has_one_attached :postImages
     store :imageUrls, accessors: [:urls], coder: JSON
@@ -12,7 +12,7 @@ class Post < ApplicationRecord
     validates :description, presence: true, length: {minimum: 10, maximum: 5000}
     validates :tags, presence: true
     validates :location, presence: true
-
+    validates :post_type, presence: true,inclusion: {in:['Events','Jobs','Charity','Explore']}
     validate :valid_event_dates
 
     belongs_to :user
@@ -56,17 +56,21 @@ class Post < ApplicationRecord
     end
 
     def event_status
-        current_time = Time.now
-        if start_date.present? && end_date.present?
-        if current_time < start_date
-          'Upcoming'
-        elsif current_time >= start_date && current_time <= end_date
-          'Ongoing'
-        else
-          'Ended'
-        end
+        current_time = Time.now.utc
+        start_date_utc = start_date.utc if start_date.present?
+        end_date_utc = end_date.utc if end_date.present?
+      
+        if start_date_utc.present? && end_date_utc.present?
+          if current_time < start_date_utc
+            'Upcoming'
+          elsif current_time >= start_date_utc && current_time <= end_date_utc
+            'Ongoing'
+          else
+            'Ended'
+          end
+      end
     end
-    end
+
 
     private
 

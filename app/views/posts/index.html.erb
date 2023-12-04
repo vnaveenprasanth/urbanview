@@ -3,17 +3,31 @@
 <div class="container_posts">
 
 <% @posts.each do |post| %>
+<%= link_to post_path(post),class:'postLink' do%> 
 <div class="posts_card">
  <div class="post">
-  <% if post.urls.present? %>
+  <div class="postStatus">
+    <% if post.event_status.present? %>
+    <span class="event_status  
+    <%= 'status_Ended' if post.event_status == 'Ended' %>
+    <%= 'status_Upcoming' if post.event_status == 'Upcoming' %>
+    <%= 'status_Ongoing' if post.event_status == 'Ongoing' %>">
+    <%= post.event_status %></span>
+    <%end%>
+  </div>
     <div class="postImage">
+      <% if post.urls.present? %>
       <%= image_tag(post.urls.first, class: 'image') %>
-
-      <% if post.going_count > 0 && post.tags.include?('events') || post.tags.include?('Events') %>
-      <span class="interaction_count"><%= post.going_count %> going 
-      <%= image_tag('animated_gif.gif',class: 'animated_gif') %>
-      </span>
+      <% else %>
+      <%= image_tag('UrbanView.png', class: 'image') %>
       <% end %>
+      
+        <% if post.going_count > 0 && post.tags.include?('events') || post.tags.include?('Events') %>
+        <span class="interaction_count"><%= post.going_count %> going 
+        <%= image_tag('animated_gif.gif',class: 'animated_gif') %>
+        </span>
+        <% end %>
+       
 
       <% if post.donated_count > 0 && post.tags.include?('charity') || post.tags.include?('Charity') %>
       <span class="interaction_count"><%= post.donated_count %> donated
@@ -28,11 +42,7 @@
       <% end %>
 
     </div>
-  <% else %>
-    <div class="postImage">
-      <%= image_tag('UrbanView.png', class: 'image') %>
-    </div>
-  <% end %>
+ 
   <div class="postTags">
     <% post.tags_array.each do |tag| %>
     <span class="tags"><%= tag %></span>
@@ -46,8 +56,7 @@
    <div class="postDescription">
     <p><%= truncate(post.description, length: 70, separator: ' ') %> 
     <span class="postDescriptionlink">
-    <%= link_to '...Read more!', post_path(post) %> 
-    <%= post.event_status %>
+    
     </span></p>
   </div>
   <div class="postUser">
@@ -79,6 +88,8 @@
  </div>
 </div>
 <% end %>
+<% end %>
+
 
 </div>
 </div>

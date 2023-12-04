@@ -68,6 +68,27 @@ input:focus {
   border: none;
 }
 
+.password_Toggle{
+  display: flex;
+  position: relative;
+  cursor: pointer;
+}
+
+
+.eyeImg{
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  z-index: 1;
+  top: 5;
+  right: 5px;
+  top: 10px;
+}
+
+.eyeImg:hover{
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
 .btn {
   display: flex;
   align-items: center;

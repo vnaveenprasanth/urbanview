@@ -23,7 +23,10 @@
 
     <div class="input">
      <%= form.label :password %>
-     <%= form.password_field :password %>
+     <div class="password_Toggle">
+     <%= form.password_field :password, class: 'password_field' %>
+     <%= image_tag 'passwordeye.png', alt:'passwordToggle', class:'eyeImg'%>
+     </div>
     </div>
 
     <div class="btn">

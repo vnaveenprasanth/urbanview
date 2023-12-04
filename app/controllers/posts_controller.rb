@@ -17,15 +17,16 @@ class PostsController < ApplicationController
         if params[:query].present?
             @posts = Post.where("title LIKE ? OR description LIKE ? OR location LIKE ? OR tags LIKE ?", "%#{params[:query]}%", "%#{params[:query]}%", "%#{params[:query]}%", "%#{params[:query]}%")
           else
+            @active_tab = params[:tab]
             case params[:tab]
             when 'Events'
-              @posts = Post.where("tags LIKE ? AND location LIKE ?", "%Events%", "%#{params[:location]}%")
+              @posts = Post.where("post_type LIKE ? AND location LIKE ?", "%Events%", "%#{params[:location]}%")
             when 'News'
-              @posts = Post.where("tags LIKE ? AND location LIKE ?", "%News%", "%#{params[:location]}%")
+              @posts = Post.where("post_type LIKE ? AND location LIKE ?", "%News%", "%#{params[:location]}%")
             when 'Jobs'
-              @posts = Post.where("tags LIKE ? AND location LIKE ?", "%Jobs%", "%#{params[:location]}%")
+              @posts = Post.where("post_type LIKE ? AND location LIKE ?", "%Jobs%", "%#{params[:location]}%")
             when 'Charity'
-              @posts = Post.where("tags LIKE ? AND location LIKE ?", "%Charity%", "%#{params[:location]}%")
+              @posts = Post.where("post_type LIKE ? AND location LIKE ?", "%Charity%", "%#{params[:location]}%")
             when 'Explore'
               @posts = Post.all
             else
@@ -56,17 +57,18 @@ class PostsController < ApplicationController
         @post = Post.new(post_params)
         @post.user = current_user
         if @post.save
-            if params[:post][:images].present?
+            if params[:post][:images].present? && params[:post][:images].length > 1
                 params[:post][:images].drop(1).each do |image|
                 upload_result = Cloudinary::Uploader.upload(image)
                 @post.urls << (upload_result['secure_url'])
                 @post.save
                 end
             else
-                @post.urls << 'https://images3.alphacoders.com/133/1337543.png'
+                upload_result = Cloudinary::Uploader.upload('https://images3.alphacoders.com/133/1337543.png')
+                @post.urls << (upload_result['secure_url'])
                 @post.save
             end
-        current_user.followers.each do |follower|
+            current_user.followers.each do |follower|
             user = follower.follower
             PostMailer.new_post_notification(user, @post).deliver_now
         end
@@ -110,7 +112,7 @@ class PostsController < ApplicationController
     private
 
     def post_params
-      params.require(:post).permit(:title, :description, :location, :tags,:enable_event, :start_date, :end_date)
+      params.require(:post).permit(:title, :description, :location, :tags,:enable_event, :start_date, :end_date, :post_type)
     end
 
     def require_login
