@@ -26,15 +26,15 @@ class UsersController < ApplicationController
     
     @user.avatar.attach(io: File.open('/home/naveenprasanthv/Rails/Urbanview/UrbanView/app/assets/images/userimg.png'), filename: 'default_avatar.png', content_type: 'image/png')
 
+    if @user.save
       if @user.password == params[:user][:password_confirmation]
-        if @user.save
           redirect_to login_path, notice: 'Registration successful!'
         else
           flash.now[:error] = "User creation failed!"
             render 'new',  status: :unprocessable_entity
         end
       else
-        flash.now[:error] = "Check the credentials entered!"
+        # flash.now[:error] = "Check the credentials entered!"
           render 'new', status: :unprocessable_entity
       end
     end
