@@ -74,8 +74,10 @@ class PostsController < ApplicationController
         end
             redirect_to @post, notice: 'Post was successfully created.'
         else
-            render :new
+      
+            render :new,status: :unprocessable_entity
         end
+        
     end
 
     def update 

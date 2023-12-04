@@ -270,6 +270,21 @@ font-size: 18px;}
   font-size: 18px;
 }
 
+.field_with_errors{
+  display: flex;
+ 
+}
+
+.field_with_errors label{
+  background-color: #fc1111;
+  width: 132px !important;
+  height: 32px !important;
+  border-radius: 4px;
+  text-align: center;
+  padding: 6px;
+  font-size: 18px;
+}
+
 .createInput input {
   border: none;
   border-radius: 4px;
@@ -277,6 +292,16 @@ font-size: 18px;}
   width: 500px;
   font-size: 18px;
 }
+
+.field_with_errors input{
+  border: none;
+  border-radius: 4px;
+  padding: 4px;
+  width: 500px;
+  font-size: 18px;
+}
+
+
 .createInput textarea {
   border: none;
   border-radius: 4px;

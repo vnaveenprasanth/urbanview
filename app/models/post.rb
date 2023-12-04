@@ -74,13 +74,13 @@ class Post < ApplicationRecord
 
     private
 
-    def valid_tags
-        valid_values = %w(Events News Jobs Charity events news jobs charity)
-        valid_tags_array = tags_array.select { |tag| valid_values.include?(tag) }
-        unless valid_tags_array.length == 1
-        errors.add(:tags, "should contain exactly one of: #{valid_values.join(', ')}")
-        end
-    end
+    # def valid_tags
+    #     valid_values = %w(Events News Jobs Charity events news jobs charity)
+    #     valid_tags_array = tags_array.select { |tag| valid_values.include?(tag) }
+    #     unless valid_tags_array.length == 1
+    #     errors.add(:tags, "should contain exactly one of: #{valid_values.join(', ')}")
+    #     end
+    # end
 
     def event_enabled?
         enable_event == true

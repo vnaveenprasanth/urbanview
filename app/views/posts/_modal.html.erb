@@ -16,6 +16,20 @@
 </div> 
 <% end %>
    
+<% if @post.present? && @post.errors.any? %>
+<div class="modal-container">
+    <div class="modal">
+    <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+      <p class="modal_text">
+      <ul> <% @post.errors.each do |error| %>
+       <ol> <%= error.full_message %></ol>
+       <% end %>
+       </ul>
+      </p>
+      <button class="modal_btn">Close</button>
+    </div>
+</div> 
+<% end %>
 
    
   
