@@ -65,7 +65,7 @@
 
       <div class="interactionButtons">
 
-         <% if @post.tags.include?('events') || @post.tags.include?('Events') %>
+         <% if @post.post_type == 'Events' %>
           <%= button_to(post_interactions_path(@post, option: 'going'), method: :post, class: "like-post-button #{'selected' if @post.selected_option(current_user) == 'going'}") do %>
              <span>🙌</span>
             <span><%= @post.going_count %> Going</span>
@@ -81,7 +81,7 @@
             <span><%= @post.maybe_count %> Maybe</span>
           <% end %>
 
-        <% elsif @post.tags.include?('charity') || @post.tags.include?('Charity')  %>
+        <% elsif @post.post_type == 'Charity'  %>
           <%= button_to(post_interactions_path(@post, option: 'donated'), method: :post, class: "like-post-button #{'selected' if @post.selected_option(current_user) == 'donated'}") do %>
             <span>💗</span>
             <span><%= @post.donated_count %> donated</span>
