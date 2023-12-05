@@ -1,7 +1,6 @@
 class PostsController < ApplicationController
   before_action :require_login, except: [:index] 
-
-
+  
     def show
         if session[:user_id]
             @user = User.find(session[:user_id])
@@ -68,6 +67,14 @@ class PostsController < ApplicationController
                 @post.urls << (upload_result['secure_url'])
                 @post.save
             end
+            if params[:post][:videos].present?
+             
+              params[:post][:videos].drop(1).each do |video|
+              videoupload_result = Cloudinary::Uploader.upload_large(video, :resource_type => :video)
+              @post.videourls << (videoupload_result['secure_url'])
+              @post.save
+              end
+            end
             current_user.followers.each do |follower|
             user = follower.follower
             PostMailer.new_post_notification(user, @post).deliver_now
@@ -114,7 +121,7 @@ class PostsController < ApplicationController
     private
 
     def post_params
-      params.require(:post).permit(:title, :description, :location, :tags,:enable_event, :start_date, :end_date, :post_type)
+      params.require(:post).permit(:title, :description, :location, :tags, :video,:enable_event, :start_date, :end_date, :post_type)
     end
 
     def require_login

@@ -112,7 +112,7 @@
     </div>
     <% end %>
 
-    <% if @post.tags.include?('events') || @post.tags.include?('Events') %>
+    <% if @post.post_type == 'Events' %>
         <div class="interactionButtonsSection">
           Share your decision:
           <%= button_to(post_interactions_path(@post, option: 'going'), method: :post, class: "like-post-button") do %>

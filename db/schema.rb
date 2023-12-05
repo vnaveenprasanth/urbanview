@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_04_062935) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_05_115254) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -82,6 +82,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_062935) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.string "post_type"
+    t.json "videoUrls", default: []
   end
 
   create_table "users", force: :cascade do |t|

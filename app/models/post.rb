@@ -3,9 +3,15 @@ class Post < ApplicationRecord
     # validate :valid_tags
     
     # has_one_attached :postImages
+
     store :imageUrls, accessors: [:urls], coder: JSON
     after_initialize do
         self.urls ||= []
+    end
+
+    store :videoUrls, accessors: [:videourls], coder: JSON
+    after_initialize do
+        self.videourls ||= []
     end
 
     validates :title, presence: true, length: {minimum: 4, maximum: 60}
