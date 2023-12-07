@@ -1,3 +1,4 @@
+
 .container_posts {
   display: flex;
   justify-content: flex-start;
@@ -660,6 +661,20 @@ font-size: 18px;}
 
 .interactionButtons span {
   font-weight: 600;
+}
+
+/* VideoStream Css */
+
+.detailVideoStreamer {
+  display: flex;
+  justify-content: center;
+}
+
+.detailVideoStreamer video {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 /* Slider Css */

@@ -1341,7 +1341,7 @@ document.addEventListener("turbo:load", function () {
     })
 
     const detailContainer = document.querySelector('.detailContainer')
-    detailContainer.addEventListener('click', function (e) {
+    detailContainer?.addEventListener('click', function (e) {
       if (!e.target.closest('.postButtons')) {
         controlDropdown.style.display = 'none';
       }

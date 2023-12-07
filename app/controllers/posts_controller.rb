@@ -70,8 +70,10 @@ class PostsController < ApplicationController
             if params[:post][:videos].present?
              
               params[:post][:videos].drop(1).each do |video|
-              videoupload_result = Cloudinary::Uploader.upload_large(video, :resource_type => :video)
-              @post.videourls << (videoupload_result['secure_url'])
+              videoupload_result = Cloudinary::Uploader.upload_large(video, :resource_type => :video,
+              :quality => 'auto',
+              :transformation => { streaming_profile: 'auto',format: 'm3u8' })
+              @post.videourls << (videoupload_result['public_id'])
               @post.save
               end
             end

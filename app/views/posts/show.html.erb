@@ -104,12 +104,20 @@
     </div>
     </div>
 
-    <% if@post.urls.count > 0 %>
+    <% if@post.videourls.count > 0 %>
+    <div class="detailVideoStreamer shadow">
+      <% @post.videourls.each do |url| %>
+        <%= cl_video_tag(url, :cloud_name => 'dqrt7ghqi', :id => 'cloudinary-video-player', :controls => true) %>
+      <% end %>
+    </div>
+
+    <% elsif@post.urls.count > 0 %>
     <div class="detailImagesSlider">
       <% @post.urls.each do |url| %>
         <%= image_tag(url, width: '100px') %>
       <% end %>
     </div>
+    
     <% end %>
 
     <% if @post.post_type == 'Events' %>
@@ -217,8 +225,6 @@
 </div>
 </div>
 </div>
-
-
 
 
 
