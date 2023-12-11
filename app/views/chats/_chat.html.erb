@@ -1,0 +1,8 @@
+<% if chat %>
+  <div class="chat-message">
+    <span class="chat_Username"><%= chat&.user&.username %></span>
+    <span class="chat_Message"><%= chat.content %><span>
+  </div>
+<% else %>
+  <p>Chat not found</p>
+<% end %>

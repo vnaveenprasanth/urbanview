@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount ActionCable.server => '/cable'
+
   root "posts#index"
 
   get 'signup', to: 'users#new'
@@ -21,6 +23,8 @@ end
   resources :posts do
     resources :comments
     resources :interactions, only: %i[create destroy], controller: 'interactions'
+    resources :chats
+
   end
 
 

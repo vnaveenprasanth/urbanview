@@ -12,6 +12,7 @@
     <%= stylesheet_link_tag "password_reset", media: 'all' %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= action_cable_meta_tag %>
 
     <%= stylesheet_link_tag 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css' %>
     <%= stylesheet_link_tag 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css' %>
@@ -20,7 +21,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@300&family=Work+Sans&display=swap');
     </style>
     <link href="https://unpkg.com/cloudinary-video-player@1.10.2/dist/cld-video-player.min.css" rel="stylesheet">
-<script src="https://unpkg.com/cloudinary-video-player@1.10.2/dist/cld-video-player.min.js" 
+    <script src="https://unpkg.com/cloudinary-video-player@1.10.2/dist/cld-video-player.min.js" 
     type="text/javascript"></script>
   </head>
 
@@ -34,6 +35,5 @@
     <%= javascript_include_tag 'postAttributes' %>
     <%= javascript_include_tag 'toggle' %>
     <%= javascript_include_tag 'share', 'data-turbolinks-track': 'reload' %>
-    
   </body>
 </html>

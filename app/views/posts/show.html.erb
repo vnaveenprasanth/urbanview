@@ -11,7 +11,7 @@
         <span class="prevText">Back to Home</span>
     </div>
 
-  <div class="detailContainer"> 
+  <div class="detailContainer" > 
     <div class="detailUser">
     <div class="postTitle">
       <h1><%= @post.title %></h1> 
@@ -105,10 +105,24 @@
     </div>
 
     <% if@post.videourls.count > 0 %>
-    <div class="detailVideoStreamer shadow">
-      <% @post.videourls.each do |url| %>
-        <%= cl_video_tag(url, :cloud_name => 'dqrt7ghqi', :id => 'cloudinary-video-player', :controls => true) %>
-      <% end %>
+     <div class="detailLiveSection">
+      
+      <div class="detailVideoStreamer shadow">
+        <% @post.videourls.each do |url| %>
+          <%= cl_video_tag(url, :cloud_name => 'dqrt7ghqi', :id => 'cloudinary-video-player', :controls => true) %>
+        <% end %>
+      </div>
+
+      <div class="detailLiveChat">
+        <div id="chat-section" class="chat-section" data-post-id="<%= @post.id %>" data-user-id="<%= current_user.id %>">
+        <%= render partial: 'chats/chat', collection: @post.chats %>
+        </div>
+        <%= form_with(model: [@post, Chat.new], id: 'new-chat-form', remote: true) do |f| %>
+          <%= f.text_area :content, placeholder: 'Type your message here', id: 'chat_content' %>
+          <%= f.submit 'Send' %>
+        <% end %>
+      </div>
+      
     </div>
 
     <% elsif@post.urls.count > 0 %>
@@ -213,13 +227,14 @@
             <%= comment.content %>
           </div>
         </div>
+
+        
        </div>
 
     <% end %>
     </div>
 
   </div>
-
   </div>
 
 </div>

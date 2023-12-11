@@ -20,5 +20,9 @@ class User < ApplicationRecord
     has_many :follower_users, through: :followers, source: :follower
     has_many :following_users, through: :following, source: :followed
 
+
+    has_many :chats, dependent: :destroy
+
+  
     has_secure_password
 end  

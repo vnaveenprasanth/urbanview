@@ -28,6 +28,8 @@ class Post < ApplicationRecord
     has_many :interactions, dependent: :destroy
     has_many :interactors, through: :interactions, source: :user
      
+    has_many :chats, dependent: :destroy
+    
     def tags_array
         tags.split(',').map(&:strip)
     end
