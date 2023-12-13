@@ -1,6 +1,6 @@
 class ChatsController < ApplicationController
   def create
-    ChatChannel.broadcast_to(@post, @chat)
+    # ChatChannel.broadcast_to(@post, @chat)
   end
 
   private

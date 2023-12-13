@@ -63,39 +63,39 @@
         </span>
       </div>
 
-      <div class="interactionButtons">
+      <div class="interactionButtons" id="interactionButtons" data-post-id="<%= @post.id %>" data-user-id="<%= current_user.id %>">
 
          <% if @post.post_type == 'Events' %>
           <%= button_to(post_interactions_path(@post, option: 'going'), method: :post, class: "like-post-button #{'selected' if @post.selected_option(current_user) == 'going'}") do %>
              <span>🙌</span>
-            <span><%= @post.going_count %> Going</span>
+            <span id="going_count"><%= @post.going_count %> Going</span>
           <% end %>
 
           <%= button_to(post_interactions_path(@post, option: 'not_going'), method: :post, class: "dislike-post-button #{'selected' if @post.selected_option(current_user) == 'not_going'}") do %>
              <span>😔</span>
-            <span><%= @post.not_going_count %> Not going</span>
+            <span id="not_going_count"><%= @post.not_going_count %> Not going</span>
           <% end %>
 
           <%= button_to(post_interactions_path(@post, option: 'maybe'), method: :post, class: "maybe-post-button #{'selected' if @post.selected_option(current_user) == 'maybe'}") do %>
             <span>😶‍🌫️</span>
-            <span><%= @post.maybe_count %> Maybe</span>
+            <span id="maybe_count"><%= @post.maybe_count %> Maybe</span>
           <% end %>
 
         <% elsif @post.post_type == 'Charity'  %>
           <%= button_to(post_interactions_path(@post, option: 'donated'), method: :post, class: "like-post-button #{'selected' if @post.selected_option(current_user) == 'donated'}") do %>
             <span>💗</span>
-            <span><%= @post.donated_count %> donated</span>
+            <span id="donated_count"><%= @post.donated_count %> Donated</span>
           <% end %>
 
         <% else %>
           <%= button_to(post_interactions_path(@post, option: 'like'), method: :post, class: "like-post-button #{'selected' if @post.selected_option(current_user) == 'like'}") do %>
             <%= image_tag('like.png', alt: 'like') %>
-            <span><%= @post.like_count %> likes</span>
+            <span id="like_count"><%= @post.like_count %> Likes</span>
           <% end %>
 
           <%= button_to(post_interactions_path(@post, option: 'dislike'), method: :post, class: "dislike-post-button #{'selected' if @post.selected_option(current_user) == 'dislike'}") do %>
             <%= image_tag('dislike.png', alt: 'Notgoing') %>
-            <span><%= @post.dislike_count %> dislikes</span>
+            <span id="dislike_count"><%= @post.dislike_count %> Dislikes</span>
           <% end %>
         <% end %>
 

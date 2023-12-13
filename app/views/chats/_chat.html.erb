@@ -1,5 +1,7 @@
 <% if chat %>
   <div class="chat-message">
+  
+    <span class="chat_Useravatar"><%= cl_image_tag chat.user.avatar.key, class:'chatAvatar' %></span>
     <span class="chat_Username"><%= chat&.user&.username %></span>
     <span class="chat_Message"><%= chat.content %><span>
   </div>

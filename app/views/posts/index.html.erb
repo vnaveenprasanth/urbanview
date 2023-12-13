@@ -5,7 +5,7 @@
 <% @posts.each do |post| %>
 <%= link_to post_path(post),class:'postLink' do%> 
 <div class="posts_card">
- <div class="post">
+ <div class="post" id="post_<%= post.id %>" data-post-id="<%= post.id %>">
   <div class="postStatus">
     <% if post.event_status.present? %>
     <span class="event_status  
@@ -22,21 +22,20 @@
       <%= image_tag('UrbanView.png', class: 'image') %>
       <% end %>
       
-        <% if post.going_count > 0 && post.tags.include?('events') || post.tags.include?('Events') %>
-        <span class="interaction_count"><%= post.going_count %> going 
-        <%= image_tag('animated_gif.gif',class: 'animated_gif') %>
-        </span>
-        <% end %>
+      <% if post.going_count > 0 && post.post_type == 'Events' %>
+      <span class="interaction_count" ><span id="post_<%= post.id%>_going"><%= post.going_count %> going </span>
+      <%= image_tag('animated_gif.gif',class: 'animated_gif') %>
+      </span>
+      <% end %>
        
-
-      <% if post.donated_count > 0 && post.tags.include?('charity') || post.tags.include?('Charity') %>
-      <span class="interaction_count"><%= post.donated_count %> donated
+      <% if post.donated_count > 0 && post.post_type == 'Charity' %>
+      <span class="interaction_count" ><span id="post_<%= post.id%>_donated"><%= post.donated_count %> donated</span>
       <%= image_tag('charity_gif.gif',class: 'animated_gif') %>
       </span>
       <% end %>
 
       <% if post.like_count > 0 %>
-      <span class="interaction_count"><%= post.like_count %> liked
+      <span class="interaction_count"><span id="post_<%= post.id%>_like"><%= post.like_count %> liked</span>
       <%= image_tag('like_gif.gif',class: 'animated_gif') %>
       </span>
       <% end %>
@@ -81,17 +80,12 @@
         <%= image_tag('index_share.png', alt: 'Share Post') %>
       </button>
       </span>
-   
-
+        </div>
+      </div>
+    </div>
+    <% end %>
+    <% end %>
   </div>
-
- </div>
-</div>
-<% end %>
-<% end %>
-
-
-</div>
 </div>
 
 

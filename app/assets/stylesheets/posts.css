@@ -710,6 +710,14 @@ font-size: 18px;}
   font-size: 12px;
 }
 
+
+
+.chat_Useravatar img{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
 #new-chat-form{
   display: flex;
   justify-content: space-between;
@@ -748,6 +756,7 @@ font-size: 18px;}
   background-color: #fca311;
   color: #e5e5e5;
   cursor: pointer;
+  transform: translateX(0.2rem);
 }
 /* VideoStream Css */
 
