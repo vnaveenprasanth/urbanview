@@ -41,9 +41,13 @@
           <% end %>
         </span>
         <span class="userData">
-          <span>
-              @<%= @post.user.username %>
-          </span>
+        
+        <span>
+          <%= link_to user_path(@post.user), class: 'user_profile-link' do %>
+            @<%= @post.user.username %>
+          <% end %>
+        </span>
+
           <span>
               Posted on <%= @post.created_at.strftime('%d %B %Y') %>
           </span>

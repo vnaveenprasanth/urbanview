@@ -14,8 +14,8 @@
         <%= link_to new_post_path,title:'create new post' do %>
             <%= image_tag 'add.png', alt: 'Add Post', class: 'addImage_main' %>
         <% end %>
-        <% if logged_in? && @user.avatar.attached? %>
-            <%= cl_image_tag @user.avatar.key, class:'userImage_main' %>
+        <% if logged_in? && current_user_instance.avatar.attached? %>
+            <%= cl_image_tag current_user_instance.avatar.key, class:'userImage_main' %>
         <% end %>  
         <div class="user_dropdown">
             <% if logged_in? %>

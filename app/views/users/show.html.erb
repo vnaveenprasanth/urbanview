@@ -1,7 +1,7 @@
 <div class="container_page">
 <%= render 'page' %>
 
-<div class="profile_main">
+<div class="profile_main" id="profile_main">
     
     <div class="prevContainer">
         <span>
@@ -18,19 +18,129 @@
                 <%= cl_image_tag @user.avatar.key, :width=>150, :crop=>"fill" %>
             <% end %>
         </div>
+
         <div class="profileDetails">
-             <div class="details">
+
+             <div class="userDetails">
                <% if logged_in? %>
-               <p><span>Username</span> <span><%= @user.username %></span></p>
-               <p><span>Email</span> <span><%= @user.email %></span></p>
-               <p><span>Location</span> <span><%= @user.location %></span></p>
+               <span class="profileUser">
+                 <%= image_tag('profileuser.png', alt: 'user   ') %>
+               <%= @user.username %></span>
+               <span class="profileLocation">
+                 <%= image_tag('location.png', alt: 'location') %>
+               <%= @user.location %></span>
+               
+               
+                
+
+                <div class="accountDetails">
+                <span class="followers-count"><%= @user.followers.count %> Followers</span>
+                <span class="following-count"><%= @user.following.count %> Following</span>
+                <span class="pusblishedPosts-count"><%=@user.published_posts_count %> Posts</span>
+                 </div> 
+
+
+                 <% unless current_user == @user %>
+               <span class="profilefollow_unfollow-btn">
+                    <% if current_user.following_users.include?(@user) %>
+                        <%= form_tag unfollow_user_path(@user), method: :delete do %>
+                        <%= submit_tag 'Unfollow' %>
+                        <% end %>
+                    <% else %>
+                        <%= form_tag follow_user_path(@user), method: :post do %>
+                        <%= submit_tag 'Follow' %>
+                        <% end %>
+                    <% end %>
+                </span>
+                <% end %>
+
+                <% if current_user.id == @user.id %>
+                <span class="button">
+                    <%= button_to edit_user_path(@user), method: :get, class:'usereditBtn' do %>
+                    <%= image_tag('edit.png', alt: 'Edit') %>
+                    Edit
+                    <% end %>
+                </span>
+                <%end%>
                <% end %>
+
              </div>
-            <div class="button">
-               <%= button_to 'Edit Profile', edit_user_path(@user), method: :get, class:'editBtn' %>
-            </div>
+
+
+
+        <div class="accountEventDetails">
+        <span class="attended-events" id="event-box">
+        <h3>Attended Events</h3>
+        <div class="attendedEventsSection">
+        <% @user.attended_events.each do |event| %>
+            <span class="event">
+            <%= link_to post_path(event[:id]), class: 'attendedEvent-link' do %>
+            <%= event[:title] %>
+            <% end %>
+            </span>
+        <% end %>
         </div>
+        </span>
+
+        <span class="hosted-events" id="event-box">
+        <h3>Hosted Events</h3>
+        <div class="hostedEventsSection">
+        <% @user.hosted_events.each do |event| %>
+            <span class="event">
+            <%= link_to post_path(event[:id]), class: 'attendedEvent-link' do %>
+            <%= event[:title] %>
+            <% end %>
+            </span>
+        <% end %>
+        </div>
+        </span>
+
+        <span class="user-interests" id="event-box">
+        <h3>User Interests</h3>
+        <div class="interestsSection">
+        <% @user.user_interests.each do |interest| %>
+            <span class="interest">
+            <%= link_to posts_path(query: interest) do%>
+            <%= interest %>
+            <% end %>
+            </span>
+        <% end %>
+        </div>
+        </span>
+        </div> 
+
     </div>
+</div> 
+        
+         <div class="user-posts">
+         <h3>Posts</h3>
+         <div class="userPosts">
+            <% @user.published_posts.each do |post| %>
+            <%= link_to post_path(post.id), class: 'userPost-link' do %>
+            <div class="userPost">
+                <span class="userPostImage">
+                <% if post.urls.present? %>
+                <%= image_tag(post.urls.first, class: 'image') %>
+                <% else %>
+                <%= image_tag('UrbanView.png', class: 'image') %>
+                <% end %>
+                </span>
+                <span class="userPostDetails">
+                <span class="userPostTitle">
+                <h4>Title</h4>
+                <%= post.title %>
+                </span>
+                <span class="userPostDescription">
+                <h4>Description</h4> 
+                <%= truncate(post.description, length: 200, separator: ' ') %> 
+                </span>
+                </span>
+            </div>
+            <% end %>
+            <% end %>
+            </div>
+        </div> 
+
 </div>
 
 </div>

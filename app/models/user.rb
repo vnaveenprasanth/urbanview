@@ -23,6 +23,29 @@ class User < ApplicationRecord
 
     has_many :chats, dependent: :destroy
 
+    def attended_events
+      going_posts = interactions.where(option: 'going').map(&:post)
+      going_posts.map {|post| { id: post.id, title: post.title } }
+    end
+
+    def hosted_events
+      hosted_posts = posts.where(post_type: 'Events')
+      hosted_posts.map {|post| {id: post.id, title: post.title}}
+    end
+
+    def user_interests
+      interacted_posts = interactions.includes(:post).map(&:post)
+      tags = interacted_posts.flat_map(&:tags_array).uniq
+    end
+
+    def published_posts
+      posts
+    end
+
+    def published_posts_count
+      usersPosts = posts
+      usersPosts.count
+    end
   
     has_secure_password
-end  
+end 
