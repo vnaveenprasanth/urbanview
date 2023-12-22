@@ -164,7 +164,7 @@ input:focus {
 
 .profileContainer {
   display: flex;
-  background-color: #fca311;
+  background-color: #e5e5e5;
   border-radius: 4px;
   justify-content: flex-start;
   margin-right: 130px;
@@ -185,8 +185,7 @@ transition: box-shadow 0.3s ease-in;
   width: 20%;  
   border-radius: 16px;
   /* background: -webkit-linear-gradient(90deg, hsla(37, 98%, 53%, 1) 50%, hsla(0, 0%, 60%, 1) 70%); */
-  background-color: #fff;
-
+  background-color: #e5e5e5;
 }
 
 .profileImage img {
@@ -436,7 +435,7 @@ transition: box-shadow 0.3s ease-in;
   /* flex-direction: column; */
   width: 600px;
   margin-top: 12px;
-  background-color: #fff;
+  background-color: #e5e5e5;
   /* border: 2px solid #000; */
   padding: 12px;
   gap: 12px;
